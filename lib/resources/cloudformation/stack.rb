@@ -90,7 +90,11 @@ module Serverspec
           # A list of resources created
           # @return [Array(Hash)]
           def resources
-            @stack.list_stack_resources
+            resources = []
+            @stack.resource_summaries.each do |resource|
+              resources << resource
+            end
+            resources
           end
 
           private
