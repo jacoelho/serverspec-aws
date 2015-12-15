@@ -87,6 +87,12 @@ module Serverspec
             @stack.tags
           end
 
+          # A list of resources created
+          # @return [Array(Hash)]
+          def resources
+            @stack.list_stack_resources
+          end
+
           private
 
           # @private
