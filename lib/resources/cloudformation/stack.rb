@@ -91,8 +91,13 @@ module Serverspec
           # @return [Array(Hash)]
           def resources
             resources = []
-            @stack.resource_summaries.each do |resource|
-              resources << resource
+            loop do
+              value = @aws.list_stack_resources(stack_name: @stack_name, next_token: defined?(next_token))
+              value.data[:stack_resource_summaries].each do |summary|
+                resources << summary
+              end
+              next_token = value.data[:next_token]
+              break if next_token.nil?
             end
             resources
           end
