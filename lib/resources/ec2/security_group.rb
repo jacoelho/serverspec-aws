@@ -51,11 +51,39 @@ module Serverspec
             @sg.ip_permissions
           end
 
+          # Inbound ports of the security group
+          # @return [Array(Array)]
+          def ingress_ports
+            ports = []
+            @sg.ip_permissions.each do |rule|
+              if rule.from_port == rule.to_port
+                ports << rule.from_port
+              else
+                ports << [rule.from_port, rule.to_port]
+              end
+            end
+            ports
+          end
+
           # [EC2-VPC] One or more outbound rules associated with the security
           # group
           # @return [Array(Hash)]
           def egress_permissions
             @sg.ip_permissions_egress
+          end
+
+          # Outbound ports of the security group
+          # @return [Array(Array)]
+          def egress_ports
+            ports = []
+            @sg.ip_permissions_egress.each do |rule|
+              if rule.from_port == rule.to_port
+                ports << rule.from_port
+              else
+                ports << [rule.from_port, rule.to_port]
+              end
+            end
+            ports
           end
 
           # [EC2-VPC] The ID of the VPC for the security group
