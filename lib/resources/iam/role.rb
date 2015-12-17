@@ -59,6 +59,15 @@ module Serverspec
             JSON.parse(URI.decode(@role.assume_role_policy_document))
           end
 
+          def policies
+            policies = []
+            list = @aws.list_role_policies(role_name: @role_name)
+            list.each do |rolepolicy|
+              policies << rolepolicy
+            end
+            policies
+          end
+
           private
 
           # @private
