@@ -11,3 +11,4 @@ gem 'yard', '~>0.8'
 gem 'guard-rspec', '~>4'
 gem 'guard-rubocop', '~>1'
 gem 'rake', '~>10.4'
+gem 'jeweler', require: false

@@ -22,6 +22,7 @@ autoscaling.stub_responses(
       availability_zone: 'us-east-1a',
       lifecycle_state: 'InService',
       health_status: 'Healthy',
+      protected_from_scale_in: false,
       launch_configuration_name: 'test-config'
     }],
     suspended_processes: [{
