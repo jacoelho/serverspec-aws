@@ -54,7 +54,9 @@ module Serverspec
           # Returns IAM::Role policy document
           # @return [String]
           def assume_role_policy_document
-            @role.assume_role_policy_document
+            require 'uri'
+            require 'json'
+            JSON.parse(URI.decode(@role.assume_role_policy_document))
           end
 
           private
